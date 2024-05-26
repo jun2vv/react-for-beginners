@@ -2,17 +2,32 @@ import Button from "./Button";
 import styles from "./App.module.css";
 import { useState, useEffect } from "react";
 
-function App() {
-  const [counter, setValue] = useState(0);
-  const onClick = () => setValue((prev) => prev+1);
-  console.log("i run all");
+function Hello() {
   useEffect(() => {
-    console.log("tetete")
+    console.log("hi :)");
+    return function() {
+      console.log("bye :(");
+    }
   }, []);
+
+  useEffect(function() {
+    console.log("hi :)");
+    return function() {
+      console.log("bye :(");
+    }
+  }, []);
+
+  return <h1>hello</h1>
+}
+
+function App() {
+  const [showing, setShowing] = useState(false);
+  const onClick = () => setShowing((prev) => !prev);
+  
   return (
     <div>
-      <h1 className={styles.title}>{counter}</h1>
-      <button onClick={onClick}>click me</button>
+      {showing ? <Hello /> : null}
+      <button onClick={onClick}>{showing ? "Hide" : "Show"}</button>
     </div>
   );
 }
